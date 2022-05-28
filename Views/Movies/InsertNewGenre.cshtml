@@ -1,0 +1,31 @@
+﻿@model MovieCatalogueApp.Models.MovieGenre
+
+@{
+    ViewData["Title"] = "InsertNewGenre";
+}
+
+<h1>Insert</h1>
+
+<h4>Genre for @Model.movie.Title</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm("InsertNewGenre", "Genres"))
+        {
+            <div class="form-group">
+                @Html.DropDownListFor(genre => genre.genreId,
+                                        new SelectList(Model.genres, "Id", "Name"),
+                                        new { @class = "form-control"})
+                @Html.HiddenFor(movie => movie.movieId)
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Insert" class="btn btn-primary"/>
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    <a href=/Movies/Details/@Model.movieId>Back to Details</a>
+</div>

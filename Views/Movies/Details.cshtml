@@ -1,0 +1,54 @@
+﻿@model MovieCatalogueApp.Models.Movie
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+    <h6>Genres</h6>
+    <ul>
+        @foreach(var item in Model.Genres)
+        {
+            <li>
+                @item.Name
+            </li>
+        }
+    </ul>
+    <h6>Cast & Crew</h6>
+    <ul>
+        @foreach(var item in Model.CastAndCrew)
+        {
+            <li>
+                <a href="/People/Details/@item.Id">@item.Name @item.Surname</a>
+            </li>
+        }
+    </ul>
+</div>
+
+<div>
+    <a href="/Movies/InsertNewGenre/@Model.Id">Insert new genre</a> |
+    <a href="/Movies/InsertNewPerson/@Model.Id">Insert person to cast & crew</a>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
